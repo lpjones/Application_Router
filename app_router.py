@@ -38,11 +38,14 @@ class Router:
     def findRoute(self, str):
         pattern = str.split('.')
         cur_node = self.tree.root
+        server = cur_node.server
         for pat in pattern:
+            if cur_node.server != '':
+                server = cur_node.server
             if pat in cur_node.routes:
                 cur_node = cur_node.routes[pat]
             else:
                 break
-        if (cur_node.server == ''):
+        if (server == ''):
             return "No Valid Server"
-        return cur_node.server
+        return server
